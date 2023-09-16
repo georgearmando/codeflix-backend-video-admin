@@ -48,7 +48,7 @@ export class Category {
     this.is_active = false;
   }
 
- /*  toJSON () {
+ toJSON () {
     return {
       category_id: this.category_id,
       name: this.name,
@@ -56,5 +56,5 @@ export class Category {
       is_active: this.is_active,
       created_at: this.created_at
     }
-  } */
+  }
 }
