@@ -1,16 +1,23 @@
-/*
-* Essa configuração fará com que o jest possa reconhecer os decorators
-* do class-validator
-*/
 {
+  "$schema": "https://json.schemastore.org/swcrc",
+  "sourceMaps": true,
   "jsc": {
     "parser": {
       "syntax": "typescript",
-      "decorators": true
+      "decorators": true,
+      "dynamicImport": true
     },
     "transform": {
       "legacyDecorator": true,
       "decoratorMetadata": true
+    },
+    "baseUrl": "./",
+    "keepClassNames": true,
+    "paths": {
+      "@core/*": [
+        "./src/core/*"
+      ]
     }
-  }
+  },
+  "minify": false
 }

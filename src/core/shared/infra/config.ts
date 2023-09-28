@@ -1,5 +1,5 @@
-import { config as readEnv } from "dotenv";
-import { join } from "node:path";
+import { config as readEnv } from 'dotenv';
+import { join } from 'node:path';
 
 export class Config {
   static env: any = null;
@@ -20,7 +20,7 @@ export class Config {
     }
 
     Config.env = readEnv({
-      path: join(__dirname, `../../../envs/.env.${process.env.NODE_ENV}`),
+      path: join(__dirname, `../../../../envs/.env.${process.env.NODE_ENV}`),
     }).parsed;
   }
 }
