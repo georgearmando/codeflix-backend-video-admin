@@ -42,18 +42,18 @@ export class Category extends Entity {
   //Este é um factory method para criação de categoria
   static create (props: CategoryCreateProps): Category {
     const category = new Category(props);
-    Category.validate(category);
+    //ou category.validate();
+    category.validate(['name']);
     return category;
   }
 
   changeName (name: string): void {
     this.name = name;
-    Category.validate(this);
+    this.validate(['name']);
   }
 
   changeDescription (description: string): void {
     this.description = description;
-    Category.validate(this);
   }
 
   activate (): void {
@@ -67,16 +67,12 @@ export class Category extends Entity {
   update(name: string, description: string) {
     this.name = name;
     this.description = description;
-    Category.validate(this);
+    this.validate(['name']);
   }
 
-  static validate(entity: Category) {
+  validate(fields?: string[]) {
     const validator = CategoryValidatorFactory.create();
-    const isValid = validator.validate(entity);
-
-    if (!isValid) {
-      throw new EntityValidationError(validator.errors);
-    }
+    return validator.validate(this.notification, this, fields);
   }
 
   static fake() {
