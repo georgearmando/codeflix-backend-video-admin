@@ -18,3 +18,4 @@ services:
       - ./.docker/dbdata:/var/lib/mysql:delegated
     security_opt:
       - seccomp:unconfined
+    command: sh -c "usermod -u 1000 mysql && docker-entrypoint.sh mysqld"
