@@ -1,4 +1,4 @@
-import { Entity } from "../entity";
+import { Entity } from '../entity';
 
 export class NotFoundError extends Error {
   constructor(

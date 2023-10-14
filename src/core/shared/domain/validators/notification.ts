@@ -12,11 +12,11 @@ export class Notification {
 
   setError(error: string | string[], field?: string) {
     if (field) {
-      this.errors.set(field, Array.isArray(error) ? error : [error])
+      this.errors.set(field, Array.isArray(error) ? error : [error]);
     } else {
       if (Array.isArray(error)) {
         error.forEach((value) => {
-          this.errors.set(value, value)
+          this.errors.set(value, value);
         });
         return;
       }
@@ -25,7 +25,7 @@ export class Notification {
   }
 
   hasErrors(): boolean {
-    return this.errors.size > 0
+    return this.errors.size > 0;
   }
 
   // Nos ajuda a concetrar erros de varias entidades em um unico Notification
@@ -36,14 +36,14 @@ export class Notification {
   }
 
   toJSON() {
-    const errors: Array<string | { [key: string]: string[]}> = [];
+    const errors: Array<string | { [key: string]: string[] }> = [];
     this.errors.forEach((value, key) => {
-      if(typeof value === 'string') {
+      if (typeof value === 'string') {
         errors.push(value);
-      }  else {
-        errors.push({ [key]: value })
+      } else {
+        errors.push({ [key]: value });
       }
     });
-    return errors
+    return errors;
   }
 }

@@ -1,10 +1,10 @@
-import { Category } from "../../../../domain/category.entity";
-import { CategorySearchResult } from "../../../../domain/category.repository";
-import { CategoryInMemoryRepository } from "../../../../infra/db/in-memory/category-inMemory.repository";
-import { CategoryOutputMapper } from "../../commom/category-output";
-import { ListCategoriesUseCase } from "../list-categories.usecase";
+import { Category } from '../../../../domain/category.entity';
+import { CategorySearchResult } from '../../../../domain/category.repository';
+import { CategoryInMemoryRepository } from '../../../../infra/db/in-memory/category-inMemory.repository';
+import { CategoryOutputMapper } from '../../commom/category-output';
+import { ListCategoriesUseCase } from '../list-categories.usecase';
 
-describe("ListCategoriesUseCase Unit Tests", () => {
+describe('ListCategoriesUseCase Unit Tests', () => {
   let useCase: ListCategoriesUseCase;
   let repository: CategoryInMemoryRepository;
 
@@ -13,7 +13,7 @@ describe("ListCategoriesUseCase Unit Tests", () => {
     useCase = new ListCategoriesUseCase(repository);
   });
 
-  test("toOutput method", () => {
+  test('toOutput method', () => {
     let result = new CategorySearchResult({
       items: [],
       total: 1,
@@ -21,16 +21,16 @@ describe("ListCategoriesUseCase Unit Tests", () => {
       per_page: 2,
     });
 
-    let output = useCase["toOutput"](result);
+    let output = useCase['toOutput'](result);
     expect(output).toStrictEqual({
       items: [],
       total: 1,
       current_page: 1,
       last_page: 1,
-      per_page: 2
+      per_page: 2,
     });
 
-    const entity = Category.create({ name: "Movie"});
+    const entity = Category.create({ name: 'Movie' });
     result = new CategorySearchResult({
       items: [entity],
       total: 1,
@@ -38,22 +38,22 @@ describe("ListCategoriesUseCase Unit Tests", () => {
       per_page: 2,
     });
 
-    output = useCase["toOutput"](result);
+    output = useCase['toOutput'](result);
     expect(output).toStrictEqual({
       items: [entity].map(CategoryOutputMapper.toOutput),
       total: 1,
       current_page: 1,
       last_page: 1,
-      per_page: 2
-    })
+      per_page: 2,
+    });
   });
 
-  it("should return output sorted by created_at when input param is empty", async () => {
+  it('should return output sorted by created_at when input param is empty', async () => {
     const items = [
       new Category({ name: 'test 1' }),
-      new Category({ 
+      new Category({
         name: 'test 2',
-        created_at: new Date(new Date().getTime() + 100), 
+        created_at: new Date(new Date().getTime() + 100),
       }),
     ];
     repository.items = items;
@@ -64,13 +64,13 @@ describe("ListCategoriesUseCase Unit Tests", () => {
       total: 2,
       current_page: 1,
       last_page: 1,
-      per_page: 15
-    })
+      per_page: 15,
+    });
   });
 
-  it("should return output usig pagination, sort and filter", async() => {
+  it('should return output usig pagination, sort and filter', async () => {
     const items = [
-      new Category({ name: "a" }),
+      new Category({ name: 'a' }),
       new Category({ name: 'AAA' }),
       new Category({ name: 'AaA' }),
       new Category({ name: 'b' }),
@@ -82,28 +82,28 @@ describe("ListCategoriesUseCase Unit Tests", () => {
       page: 1,
       per_page: 2,
       sort: 'name',
-      filter: 'a'
+      filter: 'a',
     });
     expect(output).toStrictEqual({
       items: [items[1], items[2]].map(CategoryOutputMapper.toOutput),
       total: 3,
       current_page: 1,
       last_page: 2,
-      per_page: 2
+      per_page: 2,
     });
 
     output = await useCase.execute({
       page: 2,
       per_page: 2,
       sort: 'name',
-      filter: 'a'
+      filter: 'a',
     });
     expect(output).toStrictEqual({
       items: [items[0]].map(CategoryOutputMapper.toOutput),
       total: 3,
       current_page: 2,
       last_page: 2,
-      per_page: 2
+      per_page: 2,
     });
 
     output = await useCase.execute({
@@ -118,7 +118,7 @@ describe("ListCategoriesUseCase Unit Tests", () => {
       total: 3,
       current_page: 1,
       last_page: 2,
-      per_page: 2
-    })
+      per_page: 2,
+    });
   });
 });

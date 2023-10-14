@@ -1,5 +1,5 @@
-import { Sequelize, SequelizeOptions } from "sequelize-typescript";
-import { Config } from "../config";
+import { Sequelize, SequelizeOptions } from 'sequelize-typescript';
+import { Config } from '../config';
 
 export function setupSequelize(options: SequelizeOptions = {}) {
   let _sequelize: Sequelize;
@@ -7,7 +7,7 @@ export function setupSequelize(options: SequelizeOptions = {}) {
   beforeAll(async () => {
     _sequelize = new Sequelize({
       ...Config.db(),
-      ...options, 
+      ...options,
       // Caso forem passadas as options vao sobrescrever os valores do Config
       // uma vez que estao depois do Config
     });

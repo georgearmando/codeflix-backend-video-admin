@@ -1,4 +1,4 @@
-import { FieldsErrors } from "./shared/domain/validators/validator-field-interface";
+import { FieldsErrors } from './shared/domain/validators/validator-field-interface';
 
 declare global {
   namespace jest {
@@ -11,4 +11,4 @@ declare global {
   }
 }
 
-export {}
+export {};

@@ -1,6 +1,6 @@
-import { validateSync } from "class-validator";
-import { IValidatorFields } from "./validator-field-interface";
-import { Notification } from "./notification";
+import { validateSync } from 'class-validator';
+import { IValidatorFields } from './validator-field-interface';
+import { Notification } from './notification';
 
 export abstract class ClassValidatorFields implements IValidatorFields {
   validate(notification: Notification, data: any, fields: string[]): boolean {
@@ -8,8 +8,8 @@ export abstract class ClassValidatorFields implements IValidatorFields {
       groups: fields,
     });
 
-    if(errors.length) {
-      for(const error of errors) {
+    if (errors.length) {
+      for (const error of errors) {
         const field = error.property;
         Object.values(error.constraints!).forEach((message) => {
           notification.addError(message, field);

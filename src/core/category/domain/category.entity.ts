@@ -1,9 +1,8 @@
-import { Entity } from "../../shared/domain/entity";
-import { EntityValidationError } from "../../shared/domain/validators/validation.error";
-import { ValueObject } from "../../shared/domain/value-object";
-import { Uuid } from "../../shared/domain/value-objects/uuid.vo";
-import { CategoryFakeBuilder } from "./category-fake.builder";
-import { CategoryValidatorFactory } from "./category.validator";
+import { Entity } from '../../shared/domain/entity';
+import { ValueObject } from '../../shared/domain/value-object';
+import { Uuid } from '../../shared/domain/value-objects/uuid.vo';
+import { CategoryFakeBuilder } from './category-fake.builder';
+import { CategoryValidatorFactory } from './category.validator';
 
 export type CategoryConstructorProps = {
   category_id?: Uuid;
@@ -11,13 +10,13 @@ export type CategoryConstructorProps = {
   description?: string;
   is_active?: boolean;
   created_at?: Date;
-}
+};
 
 export type CategoryCreateProps = {
   name: string;
   description?: string;
   is_active?: boolean;
-}
+};
 
 export class Category extends Entity {
   category_id: Uuid;
@@ -40,27 +39,27 @@ export class Category extends Entity {
   }
 
   //Este é um factory method para criação de categoria
-  static create (props: CategoryCreateProps): Category {
+  static create(props: CategoryCreateProps): Category {
     const category = new Category(props);
     //ou category.validate();
     category.validate(['name']);
     return category;
   }
 
-  changeName (name: string): void {
+  changeName(name: string): void {
     this.name = name;
     this.validate(['name']);
   }
 
-  changeDescription (description: string): void {
+  changeDescription(description: string): void {
     this.description = description;
   }
 
-  activate (): void {
+  activate(): void {
     this.is_active = true;
   }
 
-  deactivate (): void {
+  deactivate(): void {
     this.is_active = false;
   }
 
@@ -79,13 +78,13 @@ export class Category extends Entity {
     return CategoryFakeBuilder;
   }
 
-  toJSON () {
+  toJSON() {
     return {
       category_id: this.category_id.id,
       name: this.name,
       description: this.description,
       is_active: this.is_active,
-      created_at: this.created_at
-    }
+      created_at: this.created_at,
+    };
   }
 }

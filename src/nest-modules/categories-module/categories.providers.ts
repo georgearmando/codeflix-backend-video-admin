@@ -50,7 +50,7 @@ export const USE_CASES = {
     inject: [REPOSITORIES.CATEGORY_REPOSITORY.provide],
   },
   GET_CATEGORY_USE_CASE: {
-    provide: CreateCategoryUseCase,
+    provide: GetCategoryUsecase,
     useFactory: (categoryRepo: ICategoryRepository) => {
       return new GetCategoryUsecase(categoryRepo);
     },
