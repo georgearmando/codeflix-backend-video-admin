@@ -9,7 +9,6 @@ import { SharedModule } from './nest-modules/shared-module/shared.module';
     ConfigModule.forRoot(),
     DatabaseModule,
     CategoriesModule,
-    ConfigModule,
     SharedModule,
   ],
 })
