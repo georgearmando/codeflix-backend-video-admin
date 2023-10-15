@@ -8,3 +8,6 @@ Content-Type: application/json
 
 ###
 GET http://localhost:3000/categories
+
+###
+GET http://localhost:3000/categories/d2c82f8c-2f77-4b02-bda0-0d8785f2a7e3
